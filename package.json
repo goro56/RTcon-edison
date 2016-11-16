@@ -1,0 +1,23 @@
+{
+  "name": "RTcon-edison",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goro56/RTcon-edison.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/goro56/RTcon-edison/issues"
+  },
+  "homepage": "https://github.com/goro56/RTcon-edison#readme",
+  "dependencies": {
+    "bleno": "^0.4.1"
+  }
+}
