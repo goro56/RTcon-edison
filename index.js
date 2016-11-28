@@ -17,7 +17,7 @@ R_in2.dir(mraa.DIR_OUT);
 bleno.on('stateChange', function(state){
   console.log('on -> stateChange: ' + state);
   if(state == 'poweredOn'){
-    bleno.startAdvertising('Edison', ['']);
+    bleno.startAdvertising('Edison', ['B83BD1D01FB04A96A471E2300982C40A']);
   }else{
     bleno.stopAdvertising();
   }
@@ -28,45 +28,50 @@ bleno.on('advertisingStart', function(error){
   if(!error){
     bleno.setServices([
       new bleno.PrimaryService({
-        uuid: '',
-        characteristics: ['write', 'writeWithoutResponse'],
-        onWriteRequest: function(data, offset, withoutResponse, callback){
-          console.log('write request: ' + data);
-		  if(data === 'forward'){
-		    L_in1.write(1);
-			L_in2.write(0);
-			R_in1.write(1);
-			R_in2.write(0);
-			console.log('forward');
-		  }else if(data === 'left'){
-		    L_in1.write(0);
-			L_in2.write(1);
-			R_in1.write(1);
-			R_in2.write(0);
-			console.log('left');
-		  }else if(data === 'right'){
-		    L_in1.write(1);
-			L_in2.write(0);
-			R_in1.write(0);
-			R_in2.write(1);
-			console.log('right');
-		  }else if(data === 'back'){
-		    L_in1.write(0);
-			L_in2.write(1);
-			R_in1.write(0);
-			R_in2.write(1);
-			console.log('back');
-		  }else if(data === 'stop'){
-		    L_in1.write(0);
-			L_in2.write(0);
-			R_in1.write(0);
-			R_in2.write(0);
-			console.log('stop');
-		  }else{
-		    console.log('unknown command');
-		  }
-          callback(bleno.Characteristic.RESULT_SUCCESS);
-        }
+        uuid: 'B83BD1D01FB04A96A471E2300982C40A',
+        characteristics: [
+          new bleno.Characteristic({
+            uuid: 'B83BD1D01FB04A96A471E2300982C40B',
+            properties: ['write', 'writeWithoutResponse'],
+            onWriteRequest: function(data, offset, withoutResponse, callback){
+              console.log('write request: ' + data);
+              if(data === 'forward'){
+                L_in1.write(1);
+                L_in2.write(0);
+                R_in1.write(1);
+                R_in2.write(0);
+                console.log('forward');
+              }else if(data === 'left'){
+                L_in1.write(0);
+                L_in2.write(1);
+                R_in1.write(1);
+                R_in2.write(0);
+                console.log('left');
+              }else if(data === 'right'){
+                L_in1.write(1);
+                L_in2.write(0);
+                R_in1.write(0);
+                R_in2.write(1);
+                console.log('right');
+              }else if(data === 'back'){
+                L_in1.write(0);
+                L_in2.write(1);
+                R_in1.write(0);
+                R_in2.write(1);
+                console.log('back');
+              }else if(data === 'stop'){
+                L_in1.write(0);
+                L_in2.write(0);
+                R_in1.write(0);
+                R_in2.write(0);
+                console.log('stop');
+              }else{
+                console.log('unknown command');
+              }
+              callback(bleno.Characteristic.RESULT_SUCCESS);
+            }
+          }),
+        ],
       })
     ])
   }
