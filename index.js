@@ -14,13 +14,28 @@ L_in2.dir(mraa.DIR_OUT);
 R_in1.dir(mraa.DIR_OUT);
 R_in2.dir(mraa.DIR_OUT);
 
-setInterval(function(){
-  console.log("keep alive");
-  if (!L_in1) { console.log("L_in1 GPIO context got destroyed"); }
-  if (!L_in2) { console.log("L_in2 GPIO context got destroyed"); }
-  if (!R_in1) { console.log("R_in1 GPIO context got destroyed"); }
-  if (!R_in2) { console.log("R_in2 GPIO context got destroyed"); }
-}, 10000);
+function checkGPIO(){
+  if(!L_in1){
+    L_in1 = new mraa.Gpio(2);
+	L_in1.dir(mraa.DIR_OUT);
+	console.log("reset L_in1");
+  }
+  if(!L_in2){
+    L_in2 = new mraa.Gpio(7);
+	L_in2.dir(mraa.DIR_OUT);
+	console.log("reset L_in2");
+  }
+  if(!R_in1){
+    R_in1 = new mraa.Gpio(4);
+	R_in1.dir(mraa.DIR_OUT);
+	console.log("reset R_in1");
+  }
+  if(!R_in2){
+    R_in2 = new mraa.Gpio(8);
+	R_in2.dir(mraa.DIR_OUT);
+	console.log("reset R_in2");
+  }
+}
 
 bleno.on('stateChange', function(state){
   console.log('on -> stateChange: ' + state);
@@ -42,7 +57,8 @@ bleno.on('advertisingStart', function(error){
             uuid: 'B83BD1D01FB04A96A471E2300982C40B',
             properties: ['write', 'writeWithoutResponse'],
             onWriteRequest: function(data, offset, withoutResponse, callback){
-              console.log('write request: ' + data);
+			  console.log('write request: ' + data);
+			  checkGPIO();
               if(data == 'forward'){
                 L_in1.write(1);
                 L_in2.write(0);
