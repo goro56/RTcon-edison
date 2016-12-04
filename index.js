@@ -59,8 +59,8 @@ bleno.on('advertisingStart', function(error){
             uuid: 'B83BD1D01FB04A96A471E2300982C40B',
             properties: ['write', 'writeWithoutResponse'],
             onWriteRequest: function(data, offset, withoutResponse, callback){
-			  console.log('write request: ' + data);
-			  checkGPIO();
+              console.log('write request: ' + data);
+              checkGPIO();
               if(data == 'forward'){
                 L_in1.write(1);
                 L_in2.write(0);
