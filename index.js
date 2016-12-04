@@ -100,6 +100,8 @@ bleno.on('advertisingStart', function(error){
         ],
       })
     ])
+  }else{
+    console.log('error: ' + error);
   }
 });
 
