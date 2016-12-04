@@ -1,6 +1,8 @@
 var mraa = require('mraa');
 var bleno = require('bleno');
 
+console.log("mraa version: " + mraa.getVersion());
+
 var led = new mraa.Gpio(12);
 led.dir(mraa.DIR_OUT);
 
