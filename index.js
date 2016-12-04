@@ -14,6 +14,14 @@ L_in2.dir(mraa.DIR_OUT);
 R_in1.dir(mraa.DIR_OUT);
 R_in2.dir(mraa.DIR_OUT);
 
+setInterval(function(){
+  console.log("keep alive");
+  if (!L_in1) { console.log("L_in1 GPIO context got destroyed"); }
+  if (!L_in2) { console.log("L_in2 GPIO context got destroyed"); }
+  if (!R_in1) { console.log("R_in1 GPIO context got destroyed"); }
+  if (!R_in2) { console.log("R_in2 GPIO context got destroyed"); }
+}, 10000);
+
 bleno.on('stateChange', function(state){
   console.log('on -> stateChange: ' + state);
   if(state == 'poweredOn'){
@@ -35,31 +43,31 @@ bleno.on('advertisingStart', function(error){
             properties: ['write', 'writeWithoutResponse'],
             onWriteRequest: function(data, offset, withoutResponse, callback){
               console.log('write request: ' + data);
-              if(data === 'forward'){
+              if(data == 'forward'){
                 L_in1.write(1);
                 L_in2.write(0);
                 R_in1.write(1);
                 R_in2.write(0);
                 console.log('forward');
-              }else if(data === 'left'){
+              }else if(data == 'left'){
                 L_in1.write(0);
                 L_in2.write(1);
                 R_in1.write(1);
                 R_in2.write(0);
                 console.log('left');
-              }else if(data === 'right'){
+              }else if(data == 'right'){
                 L_in1.write(1);
                 L_in2.write(0);
                 R_in1.write(0);
                 R_in2.write(1);
                 console.log('right');
-              }else if(data === 'back'){
+              }else if(data == 'back'){
                 L_in1.write(0);
                 L_in2.write(1);
                 R_in1.write(0);
                 R_in2.write(1);
                 console.log('back');
-              }else if(data === 'stop'){
+              }else if(data == 'stop'){
                 L_in1.write(0);
                 L_in2.write(0);
                 R_in1.write(0);
