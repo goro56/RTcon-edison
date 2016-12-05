@@ -110,3 +110,8 @@ bleno.on('advertisingStop', function(){
 bleno.on('servicesSet', function(){
   console.log('bleno on -> servicesSet');
 });
+
+bleno.on('accept', function(clientAddress){
+  console.log('bleno on -> accept');
+  console.log('client address: ' + clientAddress);
+});
