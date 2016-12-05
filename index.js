@@ -59,40 +59,38 @@ bleno.on('advertisingStart', function(error){
             uuid: 'B83BD1D01FB04A96A471E2300982C40B',
             properties: ['write', 'writeWithoutResponse'],
             onWriteRequest: function(data, offset, withoutResponse, callback){
-              console.log('write request: ' + data);
-              checkGPIO();
               if(data == 'forward'){
                 L_in1.write(1);
                 L_in2.write(0);
                 R_in1.write(1);
                 R_in2.write(0);
-                console.log('forward');
+                console.log('command: forward');
               }else if(data == 'left'){
                 L_in1.write(0);
                 L_in2.write(1);
                 R_in1.write(1);
                 R_in2.write(0);
-                console.log('left');
+                console.log('command: left');
               }else if(data == 'right'){
                 L_in1.write(1);
                 L_in2.write(0);
                 R_in1.write(0);
                 R_in2.write(1);
-                console.log('right');
+                console.log('command: right');
               }else if(data == 'back'){
                 L_in1.write(0);
                 L_in2.write(1);
                 R_in1.write(0);
                 R_in2.write(1);
-                console.log('back');
+                console.log('command: back');
               }else if(data == 'stop'){
                 L_in1.write(0);
                 L_in2.write(0);
                 R_in1.write(0);
                 R_in2.write(0);
-                console.log('stop');
+                console.log('command: stop');
               }else{
-                console.log('unknown command');
+                console.log('message: ' + data);
               }
               callback(bleno.Characteristic.RESULT_SUCCESS);
             }
