@@ -3,9 +3,6 @@ var bleno = require('bleno');
 
 console.log("mraa version: " + mraa.getVersion());
 
-var led = new mraa.Gpio(12);
-led.dir(mraa.DIR_OUT);
-
 var L_in1 = new mraa.Gpio(2);
 var L_in2 = new mraa.Gpio(7);
 var R_in1 = new mraa.Gpio(4);
@@ -15,29 +12,6 @@ L_in1.dir(mraa.DIR_OUT);
 L_in2.dir(mraa.DIR_OUT);
 R_in1.dir(mraa.DIR_OUT);
 R_in2.dir(mraa.DIR_OUT);
-
-function checkGPIO(){
-  if(!L_in1){
-    L_in1 = new mraa.Gpio(2);
-	L_in1.dir(mraa.DIR_OUT);
-	console.log("reset L_in1");
-  }
-  if(!L_in2){
-    L_in2 = new mraa.Gpio(7);
-	L_in2.dir(mraa.DIR_OUT);
-	console.log("reset L_in2");
-  }
-  if(!R_in1){
-    R_in1 = new mraa.Gpio(4);
-	R_in1.dir(mraa.DIR_OUT);
-	console.log("reset R_in1");
-  }
-  if(!R_in2){
-    R_in2 = new mraa.Gpio(8);
-	R_in2.dir(mraa.DIR_OUT);
-	console.log("reset R_in2");
-  }
-}
 
 bleno.on('stateChange', function(state){
   console.log('on -> stateChange: ' + state);
